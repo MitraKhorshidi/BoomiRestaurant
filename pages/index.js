@@ -1,7 +1,11 @@
-export default function Home(){
+import NavBar from "../component/navbar";
+
+const Home= () =>{
   return(
     <div>
-      <h1>Boomi Restaurant</h1>
+      <NavBar/>
+      <h1>بومی رستوران</h1>
     </div>
   );
 }
+export default Home;
