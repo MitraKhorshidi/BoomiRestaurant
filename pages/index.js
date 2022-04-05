@@ -4,7 +4,7 @@ const Home= () =>{
   return(
     <div>
       <NavBar/>
-      <h1>بومی رستوران</h1>
+      <h1>Boomi Restaurant</h1>
     </div>
   );
 }

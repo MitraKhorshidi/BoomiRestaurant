@@ -4,7 +4,7 @@ const MenuPage=()=>{
     return(
         <>
             <NavBar/>
-            <h1>منو</h1>
+            <h1>Menu</h1>
         </>
     );
 }

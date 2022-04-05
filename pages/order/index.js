@@ -4,7 +4,7 @@ const OrderPage =()=>{
     return(
         <>
             <NavBar/>
-            <h1>سفارش از بومی رستوران</h1>
+            <h1>Order</h1>
         </>
     );
 }

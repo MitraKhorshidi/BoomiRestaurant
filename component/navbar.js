@@ -2,11 +2,11 @@ import Link from "next/link";
 function NavBar(){
 
     const list=[
-        {id: "home" , name: "خانه" , href: "/"},
-        {id: "reservation" , name: "رزرو میز" , href: "/reservation"},
-        {id: "menu" , name: "منو" , href: "/menu"},
-        {id: "order" , name: "سفارش" , href: "/order"},
-        {id: "about" , name: "درباره ما" , href: "/about"},
+        {id: "home" , name: "Home" , href: "/"},
+        {id: "reservation" , name: "Reservation" , href: "/reservation"},
+        {id: "menu" , name: "Menu" , href: "/menu"},
+        {id: "order" , name: "Order" , href: "/order"},
+        {id: "about" , name: "About" , href: "/about"},
         
     ]
 

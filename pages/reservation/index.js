@@ -4,7 +4,7 @@ const ReservationPage =()=>{
     return(
         <>
             <NavBar/>
-            <h1>رزرو میز</h1>
+            <h1>Reservation</h1>
         </>
     );
     }
