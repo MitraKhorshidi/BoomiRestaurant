@@ -1,10 +1,11 @@
-import NavBar from "../component/navbar";
+import Introduction from "../components/introduction";
+import NavBar from "../components/navbar";
 
 const Home= () =>{
   return(
     <div>
       <NavBar/>
-      <h1 className="font-bold">Boomi Restaurant</h1>
+      <Introduction/>
     </div>
   );
 }

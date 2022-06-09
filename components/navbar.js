@@ -1,8 +1,7 @@
 import Link from "next/link";
-function NavBar(){
+const NavBar=()=>{
 
     const list=[
-        {id: "home" , name: "Home" , href: "/"},
         {id: "reservation" , name: "Reservation" , href: "/reservation"},
         {id: "menu" , name: "Menu" , href: "/menu"},
         {id: "order" , name: "Order" , href: "/order"},
@@ -11,10 +10,11 @@ function NavBar(){
     ]
 
     return(
-        <div>
-            <ul>
+        <div className="flex flex-row justify-between mx-16 my-5">
+            <div className="text-lg font-medium text-title hover:text-title"><Link href='/'>Boomi</Link> <span className="text-black hover:text-title"><Link href='/'>Restaurant</Link></span></div>
+            <ul className="flex flex-row gap-x-3 ">
                 {list.map((page)=>(
-                    <li key={page.id}>
+                    <li key={page.id} className="text-lg font-medium hover:text-title ">
                         <Link href={page.href}>{page.name}</Link>
                     </li>
                 ))}

@@ -1,4 +1,4 @@
-import NavBar from "../../component/navbar";
+import NavBar from "../../components/navbar";
 
 const OrderPage =()=>{
     return(
