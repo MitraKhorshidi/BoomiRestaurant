@@ -20,6 +20,11 @@ module.exports = {
       },
       colors:{
         'title' :'#0E302F' ,
+        'button1' : '#4BC6E8',
+        'button2':'#14E2F0',
+      },
+      spacing:{
+        '560' : '560px',
       },
     },
   },
