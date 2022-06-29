@@ -28,7 +28,7 @@ const Footer = () => {
             </div>
             <div className="flex flex-row gap-72 ml-24">
 
-                <p>Follow us On <br/> IN PIN fc</p>
+                <p className="text-lg">Follow us On <br/> IN PIN fc</p>
                 <Contact/>
 
             </div>
