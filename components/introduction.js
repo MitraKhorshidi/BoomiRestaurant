@@ -1,5 +1,5 @@
 import pic1 from "../assets/images/pic1.jpg";
-import pic2 from "../assets/images/pic2.jpg";
+import pic3 from "../assets/images/pic3.jpg";
 import food1 from "../assets/images/food1.jpg";
 import food2 from "../assets/images/food2.jpg";
 import food3 from "../assets/images/food3.jpg";
@@ -34,7 +34,7 @@ const Introduction = () => {
             </div>
 
             <div className="flex flex-row justify-center gap-x-72  mt-48 z-20">
-                <Button content="Reservation" href='/reservation' />
+                <Button content="Book now" href='/reservation' />
                 <Button content="Order Now" href='/order'/>
             </div>
             
@@ -44,7 +44,7 @@ const Introduction = () => {
                     <img src={food6.src} className="w-44 -mt-5 rounded-sm shadow-sm mx-auto"/>
                 </div>
                 <div className="flex flex-col bg-pink-100 h-60 w-52 rounded-sm shadow-sm">
-                    <img src={pic2.src} className="w-44 -mt-5 rounded-sm shadow-sm mx-auto"/>
+                    <img src={pic3.src} className="w-44 -mt-5 rounded-sm shadow-sm mx-auto"/>
                 </div>
             </div>
         </div>
