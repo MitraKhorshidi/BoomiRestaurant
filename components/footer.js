@@ -1,7 +1,10 @@
 import Link from "next/link";
 import BottomNavbar from "./bottomNavbar";
-import Button from "./button";
 import Contact from "./contact";
+
+import { AiOutlineInstagram } from "react-icons/ai";
+import { ImPinterest2 } from "react-icons/im";
+import { RiFacebookCircleLine } from "react-icons/ri";
 
 const Footer = () => {
     return(
@@ -23,7 +26,12 @@ const Footer = () => {
                     
                 </div>
                 <div className="flex flex-row gap-x-44">
-                    <p className="text-lg">Follow us On <br/> IN PIN fc</p>
+                    <p className="text-lg">
+                        Follow us On 
+                        <div className="flex flex-row text-3xl gap-x-1">
+                        <AiOutlineInstagram/> <ImPinterest2/> <RiFacebookCircleLine/>
+                        </div>
+                    </p> 
                     <Contact/>
                 </div>
             </div>

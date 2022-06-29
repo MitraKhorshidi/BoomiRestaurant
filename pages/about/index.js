@@ -1,13 +1,10 @@
-import Footer from "../../components/footer";
-import NavBar from "../../components/navbar";
+import Base from "../../components/base";
 
 const AboutPage= ()=>{
     return(
-        <>
-            <NavBar/>
-            <h1>About</h1>
-            <Footer/>
-        </>
+        <Base>
+        
+        </Base>
     );
 }
 export default AboutPage;

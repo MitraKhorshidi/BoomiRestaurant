@@ -1,11 +1,8 @@
-import NavBar from "../../components/navbar";
+import Base from "../../components/base";
 
 const ReservationPage =()=>{
     return(
-        <>
-            <NavBar/>
-            <h1>Reservation</h1>
-        </>
+        <Base></Base>
     );
     }
 export default ReservationPage;

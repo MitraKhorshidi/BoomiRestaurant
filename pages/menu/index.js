@@ -1,11 +1,8 @@
-import NavBar from "../../components/navbar";
+import Base from "../../components/base";
 
 const MenuPage=()=>{
     return(
-        <>
-            <NavBar/>
-            <h1>Menu</h1>
-        </>
+        <Base></Base>
     );
 }
 export default MenuPage;

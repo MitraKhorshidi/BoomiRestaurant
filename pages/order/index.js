@@ -1,11 +1,8 @@
-import NavBar from "../../components/navbar";
+import Base from "../../components/base";
 
 const OrderPage =()=>{
     return(
-        <>
-            <NavBar/>
-            <h1>Order</h1>
-        </>
+        <Base></Base>
     );
 }
 export default OrderPage;

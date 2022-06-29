@@ -1,14 +1,11 @@
-import Footer from "../components/footer";
+import Base from "../components/base";
 import Introduction from "../components/introduction";
-import NavBar from "../components/navbar";
 
 const Home= () =>{
   return(
-    <div>
-      <NavBar/>
+    <Base>
       <Introduction/>
-      <Footer/>
-    </div>
+    </Base>
   );
 }
 export default Home;
