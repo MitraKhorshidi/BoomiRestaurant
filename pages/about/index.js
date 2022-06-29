@@ -1,3 +1,4 @@
+import Footer from "../../components/footer";
 import NavBar from "../../components/navbar";
 
 const AboutPage= ()=>{
@@ -5,6 +6,7 @@ const AboutPage= ()=>{
         <>
             <NavBar/>
             <h1>About</h1>
+            <Footer/>
         </>
     );
 }
