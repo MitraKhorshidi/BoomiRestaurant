@@ -36,11 +36,11 @@ const AboutPage= ()=>{
                     </div> 
                 </div>
 
-                <div className="flex flex-row">
+                {/* <div className="flex flex-row">
                     <img src={team1.src} className="h-52"/>
                     <img src={team2.src} className="h-52"/>
                     <img src={team3.src} className="h-52"/>
-                </div>
+                </div> */}
             </div>
             
             
