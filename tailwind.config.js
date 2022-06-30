@@ -24,10 +24,14 @@ module.exports = {
         'button2':'#14E2F0',
       },
       spacing:{
+        '530' : '530px',
         '560' : '560px',
         '695' : '695px',
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+
+  ],
 }

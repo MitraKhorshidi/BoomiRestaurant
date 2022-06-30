@@ -34,8 +34,8 @@ const Introduction = () => {
             </div>
 
             <div className="flex flex-row justify-center gap-x-72  mt-48 z-20">
-                <Button content="Book now" href='/reservation' />
-                <Button content="Order Now" href='/order'/>
+                <Button content="Book" href='/reservation' />
+                <Button content="Order" href='/order'/>
             </div>
             
 

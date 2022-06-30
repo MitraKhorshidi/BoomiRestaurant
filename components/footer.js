@@ -20,7 +20,7 @@ const Footer = () => {
                         <p>4th floor , Melal Boutique Mall
                             <br/> Bosnia and Herzegovina St , Fereshte Ave , Tehran
                         </p>
-                        <p className="text-lg">Every day from 12-23<br/> lunch : 12-16 , dinner : 19-23</p>
+                        <p className="text-lg">Every day from 12-23<br/> lunch : 12-16 , dinner : 19-23 , cafe: 16-19</p>
                     </div>
 
                     
