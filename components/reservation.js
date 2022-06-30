@@ -1,15 +1,19 @@
-import Link from "next/link";
 import { useState } from "react";
-import Button from "./button";
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css"
 
 const Reservation = () =>{
+
+
+    const [date , setdate] = useState(new Date());
 
     const [edit , showEdit] = useState(false);
     const editPart =()=>{showEdit(true);}
 
 
+
     return(
-        <div className="flex flex-col gap-y-10 ">
+        <div className="flex flex-col gap-y-10 justify-center">
             <form className="flex flex-row gap-x-6 text-lg font-normal ">
                 <div className="flex flex-col gap-y-1">
                     <p>Name</p>
@@ -23,15 +27,12 @@ const Reservation = () =>{
                 <div className="flex flex-col gap-y-1">
                     <p>Phone Number</p>
                     <input type="number" className="border-1 border-slate-400 rounded-sm focus:border-black focus:ring-0 h-10"/>
-                    <p>Meal</p>
-                    <select className="border-1 border-slate-400 rounded-sm focus:border-black focus:ring-0 h-10">
-                        <option>Lunch</option>
-                        <option>Dinner</option>
-                    </select>
+                    <p>Date</p>
+                    <ReactDatePicker showTimeSelect dateFormat="MMMM d, yyyy h:mmaa" selected={date} onChange={(date) => setdate(date)} className="border-1 border-slate-400 rounded-sm focus:border-black focus:ring-0 h-10"/>
                     <p>Are you a Host ?</p>
                     <select className="border-1 border-slate-400 rounded-sm focus:border-black focus:ring-0 h-10">
                         <option>Yes</option>
-                        <option>No</option>
+                        <option selected>No</option>
                     </select>
                 </div>
             </form>
