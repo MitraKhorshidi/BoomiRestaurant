@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IoMdArrowDropdown , IoMdArrowDropup } from "react-icons/io";
 import food4 from "../assets/images/food4.jpg";
-const Card =({id , title , ingredients , price , img})=>{
+const Card =({key , title , ingredients , price , img})=>{
 
 
     const [num , setNum] =useState(1);

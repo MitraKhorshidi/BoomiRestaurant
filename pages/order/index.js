@@ -5,7 +5,7 @@ const OrderPage =({foods})=>{
     return(
         <Base>
             <div className="grid grid-cols-3 gap-y-10 mx-auto">
-                {foods.map(food => (<Card id={food.id} title={food.title} ingredients={food.ingredients} price={food.price}/>))}
+                {foods.map(food => (<Card key={food.id} title={food.title} ingredients={food.ingredients} price={food.price}/>))}
             </div>
         </Base>
     );

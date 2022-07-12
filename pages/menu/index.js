@@ -6,7 +6,7 @@ const MenuPage=({foods})=>{
     return(
         <Base>
         <div className="grid grid-cols-2 gap-x-5 border-2 p-5 mx-auto my-20 w-2/3 border-solid border-black ">
-            {foods.map(food => (<MenuItem id={food.id} title={food.title} ingredients={food.ingredients} price={food.price}/>))}
+            {foods.map(food => (<MenuItem key={food.id} title={food.title} ingredients={food.ingredients} price={food.price}/>))}
         </div>
         <div className="flex flex-row justify-center gap-x-5">
             <Button content='Book a Table' href='/reservation'/>

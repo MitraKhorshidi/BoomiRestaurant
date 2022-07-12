@@ -1,5 +1,5 @@
 import food4 from "../assets/images/food4.jpg";
-const MenuItem = ({ id , title , ingredients , price }) =>{
+const MenuItem = ({ key , title , ingredients , price }) =>{
     return(
         <div className="flex flex-row justify-between my-5">
             <div className="flex flex-row items-center gap-x-10 ">
