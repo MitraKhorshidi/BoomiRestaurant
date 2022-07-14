@@ -28,7 +28,7 @@ const Card =({key , title , ingredients , price , img})=>{
                 <p className="text-slate-800 text-base">{ingredients}</p>
                 <p className="text-lg text-tilte">{tprice} $</p>
                 <div className="flex flex-row items-center gap-x-2">
-                    <button className="text-base text-white bg-title px-3 py-1.5 rounded-sm">add to cart</button>
+                    <button className="text-base text-white bg-title active:bg-gray-900 px-3 py-1.5 rounded-sm">add to cart</button>
                     <p>{num}</p>
                     <div className="flex flex-col bg-title text-lg text-white rounded-sm">
                         <button onClick={add} ><IoMdArrowDropup/></button>
