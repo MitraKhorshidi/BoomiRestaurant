@@ -1,5 +1,5 @@
 export default class Order {
-    constructor(id,userId,time,address,price){
+    constructor({id,userId,time,address,price}){
         this.id=id;
         this.userId=userId;
         this.time=time;
@@ -7,3 +7,5 @@ export default class Order {
         this.price=price;
     }
 }
+
+

@@ -1,5 +1,5 @@
 export default class Reservation{
-    constructor(id,userId,date,tableId,num,host){
+    constructor({id,userId,date,tableId,num,host}){
         this.id=id;
         this.userId=userId;
         this.date=date;

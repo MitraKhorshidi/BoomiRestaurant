@@ -1,7 +1,7 @@
 export default class Food {
-    constructor(id, title, price, ingredient){
+    constructor({id, title, price, ingredient}){
         this.id=id;
-        this.title=tilte;
+        this.title=title;
         this.price=price;
         this.ingredient=ingredient;
     }
