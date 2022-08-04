@@ -1,8 +1,8 @@
 export default class Food {
-    constructor({id, title, price, ingredient}){
+    constructor({id, title, price, ingredients}){
         this.id=id;
         this.title=title;
         this.price=price;
-        this.ingredient=ingredient;
+        this.ingredients=ingredients;
     }
 }
