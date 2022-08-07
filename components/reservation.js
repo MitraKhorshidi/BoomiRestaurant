@@ -11,26 +11,56 @@ const Reservation = () =>{
     const editPart =()=>{showEdit(true);}
 
 
+    // const [res,setRes] = useState(undefined);
+    const [res,setRes] = useState({error:'not foun'});
+    // const [res,setRes] = useState({reservation_number:1});
+    async function add(event){
+        event.preventDefault();
 
-    return(
+        const formdata = new FormData(event.target);
+
+        console.log(event ,{...formdata} )
+
+        const data ={
+            // userId , tableId , number , host
+        }
+
+        const res = await fetch('/api/newReservation'  , {
+            method: 'POST' ,
+            body:JSON.stringify(data)
+        });
+        
+        if(res.status==200){
+            const data =await res.json();
+            setRes(data);
+        }
+        else{
+            const error=await res.text();
+            setRes({error:error});
+        }
+        
+    }
+
+    if(!res || res.error) return(
         <div className="flex flex-col gap-y-10 justify-center">
-            <form className="flex flex-row gap-x-6 text-lg font-normal ">
+            {res && res.error && <p>error:{res.error}</p>}
+            <form className="flex flex-row gap-x-6 text-lg font-normal " onSubmit={add}>
                 <div className="flex flex-col gap-y-1">
                     <p>Name</p>
-                    <input type="text" className="border-1 border-slate-400 rounded-sm focus:border-black focus:ring-0 h-10"/>
+                    <input name="name" type="text" className="border-1 border-slate-400 rounded-sm focus:border-black focus:ring-0 h-10"/>
                     <p>Number of People</p>
-                    <input type="number" className="border-1 border-slate-400 rounded-sm focus:border-black focus:ring-0 h-10"/>
+                    <input name="number" type="number" className="border-1 border-slate-400 rounded-sm focus:border-black focus:ring-0 h-10"/>
                     <p>Table Number</p>
-                    <input type={"number"} className="border-1 border-slate-400 rounded-sm focus:border-black focus:ring-0 h-10"/>
-                    <input type="submit" value="Book" className="bg-teal-300 hover:bg-teal-400 px-4 py-1 font-medium rounded-md shadow-sm self-start mt-5"/>
+                    <input name="tableId" type={"number"} className="border-1 border-slate-400 rounded-sm focus:border-black focus:ring-0 h-10"/>
+                    <input type="submit" value="Book"  className="bg-teal-300 hover:bg-teal-400 px-4 py-1 font-medium rounded-md shadow-sm self-start mt-5"/>
                 </div>
                 <div className="flex flex-col gap-y-1">
                     <p>Phone Number</p>
-                    <input type="tel" className="border-1 border-slate-400 rounded-sm focus:border-black focus:ring-0 h-10"/>
+                    <input name="userId" type="tel" className="border-1 border-slate-400 rounded-sm focus:border-black focus:ring-0 h-10"/>
                     <p>Date</p>
                     <ReactDatePicker showTimeSelect dateFormat="MMMM d, yyyy h:mmaa" selected={date} onChange={(date) => setdate(date)} className="border-1 border-slate-400 rounded-sm focus:border-black focus:ring-0 h-10"/>
                     <p>Are you a Host ?</p>
-                    <select className="border-1 border-slate-400 rounded-sm focus:border-black focus:ring-0 h-10">
+                    <select name="host" className="border-1 border-slate-400 rounded-sm focus:border-black focus:ring-0 h-10">
                         <option>Yes</option>
                         <option selected>No</option>
                     </select>
@@ -50,5 +80,8 @@ const Reservation = () =>{
         </div>
         
     );
+
+    return(<div>Succussful reservation . reservation number : {res.reservation_number}</div>)
+
 }
 export default Reservation;

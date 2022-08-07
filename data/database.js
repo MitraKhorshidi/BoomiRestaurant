@@ -54,30 +54,60 @@ export const FoodRepository = {
 
 }
 
+
+
+
+function phoneValid(phone){
+    return true;
+}
+
+
 export const ReservationRepository={
+    
     async newReservation({userId , date , num , host , tableId}){
+
+        if(!phoneValid(userId)) throw new Error('phone number is not true');
+
         const table = await tableModel.findByPk(tableId);
+
+        if(!table) throw new Error('this table is not exists');
+
         if(num<=table.min || num>=table.max){
-            return ('Number of people should be between '+table.min+' and '+table.max);
+            throw new Error('Number of people should be between '+table.min+' and '+table.max);
         }
-        const reserved = await reservationModel.findOne({where:{[Op.and]:[{TableId:tableId},{date:date}]}})
-        if(reserved){
-            return('This table has been booked.');
+
+        const prevReserv = await reservationModel.findOne({where:{[Op.and]:[{TableId:tableId},{date:date}]}})
+        if(prevReserv){
+            throw new Error('This table has been booked.');
         }
-        //if userId,tableid valid
-        // if not table free at date return error
+
         const reservation = await reservationModel.create({userId,date,num,host,tableId});
         return new Reservation(reservation);
         
     },
 
     async editReservation({reservationId,userId,date,num,host,tableId}){
-        //validation
-        //if table is free 
+
         const reservation = await reservationModel.findByPk(reservationId);
-        if(!reservation || reservation.userId==userId){
-            return 0;//error
+        if(!reservation || !reservation.userId==userId){
+            throw new Error('This reservation not exist!');
         }
+
+        if(!phoneValid(userId)) throw new Error('phone number is not true');
+
+        const table = await tableModel.findByPk(tableId);
+
+        if(!table) throw new Error('this table is not exists');
+
+        if(num<=table.min || num>=table.max){
+            throw new Error('Number of people should be between '+table.min+' and '+table.max);
+        }
+
+        const prevReserv = await reservationModel.findOne({where:{[Op.and]:[{TableId:tableId},{date:date}]}})
+        if(prevReserv){
+            throw new Error('This table has been booked.');
+        }
+
         reservation.set({date,num,host,tableId,})
         await reservation.save();
         return new Reservation(reservation);
@@ -85,9 +115,8 @@ export const ReservationRepository={
 
     async deleteReservation({reservationId,userId}){
         const reservation =await reservationModel.findByPk(reservationId);
-        if(!reservation || reservation.userId!=userId){
-            return 0; 
-            //error
+        if(!reservation || !reservation.userId==userId){
+            throw new Error('This reservation is not exist')
         }
         await reservation.destroy();
         return 1;
@@ -120,8 +149,26 @@ const foods= [
     { id: 12, title: 'Tahchin' , ingredients:'Rice with chicken and yogourt ' , price: 111},
 ];
 
+const tables=[
+    {id:1 , min:2 , max:4 },
+    {id:2 , min:2 , max:4 },
+    {id:3 , min:2 , max:4 },
+    {id:4 , min:1 , max:3 },
+    {id:5 , min:1 , max:3 },
+    {id:6 , min:1 , max:3 },
+    {id:7 , min:2 , max:4 },
+    {id:8 , min:2 , max:4 },
+    {id:9 , min:1 , max:2 },
+    {id:10, min:2 , max:4 },
+    {id:11, min:2 , max:4 },
+    {id:12, min:2 , max:4 },
+    {id:13, min:2 , max:4 },
+    {id:14, min:1 , max:3 },
+    {id:15, min:5 , max:8 },
+]
 
-async function fillDB(){
+
+async function fillFoodDB(){
     
     for(let food of foods){
         await foodModel.create(food)
@@ -129,6 +176,15 @@ async function fillDB(){
     
 }
 
+async function fillTableDB(){
+    
+    for(let table of tables){
+        await tableModel.create(table)
+    }
+    
+}
+
 myDatabase.sync()
-// .then(fillDB)
+// .then(fillFoodDB)
+// .then(fillTableDB)
 .then(_=>console.log('hello'))
