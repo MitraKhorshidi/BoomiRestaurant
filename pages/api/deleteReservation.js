@@ -5,8 +5,8 @@ export default async function handler(req, res) {
 
   try{
     const data = JSON.parse(req.body);
-    const reservation = await ReservationRepository.newReservation(data);
-    res.status(200).json({reservation_number : reservation.id , tableId:reservation.TableId , userId:reservation.userId , date:reservation.date ,num:reservation.num})
+    const result = await ReservationRepository.deleteReservation(data);
+    res.status(200).json({result : result})
   }
   catch(error){
     res.status(500).send(error.message)

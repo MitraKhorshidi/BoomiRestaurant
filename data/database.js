@@ -61,29 +61,41 @@ function phoneValid(phone){
     return true;
 }
 
+const { Op } = require("sequelize");
 
 export const ReservationRepository={
     
-    async newReservation({userId , date , num , host , tableId}){
+    async newReservation({userId , date , num , host , TableId}){
+
+        console.log(date);
 
         if(!phoneValid(userId)) throw new Error('phone number is not true');
 
-        const table = await tableModel.findByPk(tableId);
+        const table = await tableModel.findByPk(TableId);
 
         if(!table) throw new Error('this table is not exists');
 
-        if(num<=table.min || num>=table.max){
+        if(num<table.min || num>table.max){
             throw new Error('Number of people should be between '+table.min+' and '+table.max);
         }
 
-        const prevReserv = await reservationModel.findOne({where:{[Op.and]:[{TableId:tableId},{date:date}]}})
+        const prevReserv = await reservationModel.findOne({where:{[Op.and]:[{TableId:TableId},{date:date}]}})
         if(prevReserv){
             throw new Error('This table has been booked.');
         }
 
-        const reservation = await reservationModel.create({userId,date,num,host,tableId});
+        const reservation = await reservationModel.create({userId,date,num,host:host=='Yes',TableId});
         return new Reservation(reservation);
         
+    },
+
+    async searchReservation({ReservationId , userId}){
+
+        const reservation = await reservationModel.findByPk(ReservationId);
+        if(!reservation || !reservation.userId==userId){
+            throw new Error('This reservation not exist!');
+        }
+        return reservation;
     },
 
     async editReservation({reservationId,userId,date,num,host,tableId}){
@@ -114,12 +126,13 @@ export const ReservationRepository={
     },
 
     async deleteReservation({reservationId,userId}){
+        console.log(reservationId , userId);
         const reservation =await reservationModel.findByPk(reservationId);
-        if(!reservation || !reservation.userId==userId){
+        if(!reservation || reservation.userId!=userId){
             throw new Error('This reservation is not exist')
         }
         await reservation.destroy();
-        return 1;
+        return true;
         //succuss proccess
     },
 }
