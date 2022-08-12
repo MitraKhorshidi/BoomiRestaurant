@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IoMdArrowDropdown , IoMdArrowDropup } from "react-icons/io";
-const Card =({id , title , ingredients , price , img})=>{
+const Card =({id , title , ingredients , price })=>{
 
 
     const [num , setNum] =useState(1);
@@ -16,6 +16,10 @@ const Card =({id , title , ingredients , price , img})=>{
         }
     }
 
+    function addCart(){
+        
+    }
+
     
 
 
@@ -27,7 +31,7 @@ const Card =({id , title , ingredients , price , img})=>{
                 <p className="text-slate-800 text-base">{ingredients}</p>
                 <p className="text-lg text-tilte">{tprice} $</p>
                 <div className="flex flex-row items-center gap-x-2">
-                    <button className="text-base text-white bg-title active:bg-gray-900 px-3 py-1.5 rounded-sm">add to cart</button>
+                    <button onClick={addCart} className="text-base text-white bg-title active:bg-gray-900 px-3 py-1.5 rounded-sm">add to cart</button>
                     <p>{num}</p>
                     <div className="flex flex-col bg-title text-lg text-white rounded-sm">
                         <button onClick={add} ><IoMdArrowDropup/></button>

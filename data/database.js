@@ -67,7 +67,11 @@ export const ReservationRepository={
     
     async newReservation({userId , date , num , host , TableId}){
 
-        console.log(date);
+        date = new Date(date);
+        date = new Date(Math.floor(date.getTime()/(1000*60*30))*(1000*60*30));
+        if(date.getTime() < new Date().getTime() || date.getTime() > (new Date().getTime() + 1000*60*24*7)){
+            throw new Error('This date is not valid. Pick a date from now to a week further.');
+        }
 
         if(!phoneValid(userId)) throw new Error('phone number is not true');
 
@@ -79,6 +83,7 @@ export const ReservationRepository={
             throw new Error('Number of people should be between '+table.min+' and '+table.max);
         }
 
+
         const prevReserv = await reservationModel.findOne({where:{[Op.and]:[{TableId:TableId},{date:date}]}})
         if(prevReserv){
             throw new Error('This table has been booked.');
@@ -89,13 +94,13 @@ export const ReservationRepository={
         
     },
 
-    async searchReservation({ReservationId , userId}){
+    async searchReservation({reservationId , userId}){
 
-        const reservation = await reservationModel.findByPk(ReservationId);
-        if(!reservation || !reservation.userId==userId){
-            throw new Error('This reservation not exist!');
+        const reservation = await reservationModel.findByPk(reservationId);
+        if(!reservation || reservation.userId!=userId){
+            throw new Error('This reservation is not exist!');
         }
-        return reservation;
+        return new Reservation(reservation);
     },
 
     async editReservation({reservationId,userId,date,num,host,tableId}){
@@ -126,7 +131,6 @@ export const ReservationRepository={
     },
 
     async deleteReservation({reservationId,userId}){
-        console.log(reservationId , userId);
         const reservation =await reservationModel.findByPk(reservationId);
         if(!reservation || reservation.userId!=userId){
             throw new Error('This reservation is not exist')

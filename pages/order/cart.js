@@ -1,8 +1,10 @@
+import Base from "../../components/base";
+
 const CartPage = () =>{
     return(
-        <div>
+        <Base>
             <h1>Cart</h1>
-        </div>
+        </Base>
     );
 }
 export default CartPage;
