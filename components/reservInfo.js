@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { apiCancelReservation } from "../data/api";
+import { dateStr } from "../data/utility";
 
 export default function ReservInfo({reservation,onOk}){
 
@@ -33,7 +34,7 @@ export default function ReservInfo({reservation,onOk}){
             </tr>
             <tr>
                 <td className="border border-slate-300 p-2">date </td>
-                <td className="border border-slate-300 text-center">{reservation.date}</td>
+                <td className="border border-slate-300 text-center">{dateStr(reservation.date)}</td>
             </tr>
         </table>
         <div className="flex flex-row justify-center items-center gap-x-5">

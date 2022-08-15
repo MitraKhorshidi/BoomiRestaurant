@@ -30,9 +30,8 @@ const foodModel = myDatabase.define( 'Food' , {
     price:{type:DataTypes.NUMBER},
 });
 
-const orderModel = myDatabase.define('Oreder' , {
+const orderModel = myDatabase.define('Order' , {
     userId:{type:DataTypes.NUMBER},
-    time:{type:DataTypes.TIME},
     address:{type:DataTypes.STRING},
     price:{type:DataTypes.NUMBER},
 });
@@ -69,8 +68,11 @@ export const ReservationRepository={
 
         date = new Date(date);
         date = new Date(Math.floor(date.getTime()/(1000*60*30))*(1000*60*30));
-        if(date.getTime() < new Date().getTime() || date.getTime() > (new Date().getTime() + 1000*60*24*7)){
-            throw new Error('This date is not valid. Pick a date from now to a week further.');
+        if(date.getTime() < new Date().getTime() ){
+            throw new Error('Cannot pick a date from past.');
+        }
+        if(date.getTime() > (new Date().getTime() + 1000*60*60*24*7)){
+            throw new Error('Cannot pick a date after a week');
         }
 
         if(!phoneValid(userId)) throw new Error('phone number is not true');
@@ -143,8 +145,8 @@ export const ReservationRepository={
 
 
 export const OrderRepository = {
-    async newOrder({userId,time,address,price}){
-        const order =await orderModel.create({userId,time,address,price});
+    async newOrder({userId,address,shoppigCart}){
+        const order =await orderModel.create({userId,address,price});
         //orderitem??
     },
 }
