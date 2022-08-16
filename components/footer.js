@@ -8,7 +8,7 @@ import { RiFacebookCircleLine } from "react-icons/ri";
 
 const Footer = () => {
     return(
-        <div className="bg-title h-560 flex flex-row justify-evenly mt-52 text-slate-100 shadow-md">
+        <div className="bg-title h-560 flex flex-row justify-evenly mt-32 text-slate-100 shadow-md">
             <div className="flex flex-col justify-center gap-y-10">
                 <div className=" flex flex-row justify-evenly mt-16">
                     <div className="flex flex-col justify-center gap-y-6">

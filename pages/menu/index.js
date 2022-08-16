@@ -6,7 +6,8 @@ import { FoodRepository } from "../../data/database";
 export default function MenuPage({foods}){
     return(
         <Base>
-        <div className="grid grid-cols-2 gap-x-5 border-2 p-5 mx-auto my-20 w-2/3 border-solid border-black ">
+        <h1 className="text-center text-4xl font-medium text-title mt-10">Boomi Menu</h1>
+        <div className="grid grid-cols-2 gap-x-5 border-2 p-5 mx-auto my-7 w-2/3 border-solid border-black ">
             {foods.map(food => (<MenuItem key={food.id} id={food.id} title={food.title} ingredients={food.ingredients} price={food.price}/>))}
         </div>
         <div className="flex flex-row justify-center gap-x-5">
