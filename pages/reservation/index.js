@@ -1,8 +1,8 @@
 import Base from "../../components/base";
-import pic1 from "../../assets/images/pic1.jpg";
-import pic2 from "../../assets/images/pic2.jpg";
-import pic3 from "../../assets/images/pic3.jpg";
-import pic4 from "../../assets/images/pic4.jpg";
+import reserve1 from "../../assets/images/reserve1.jpg";
+import reserve2 from "../../assets/images/reserve2.jpg";
+import reserve3 from "../../assets/images/reserve3.jpg";
+import reserve4 from "../../assets/images/reserve4.jpg";
 import Reservation from "../../components/reservation";
 
 
@@ -18,12 +18,12 @@ const ReservationPage =()=>{
                         <div className="w-1/3 h-4 bg-title -mb-1.5 shadow-md"></div>
                     </div>
                     <div className="flex flex-row gap-x-2 z-10 -mt-530">
-                        <img src={pic1.src} className="w-72 rounded-tl-md"/>
-                        <img src={pic2.src} className="w-52 rounded-tr-md"/>
+                        <img src={reserve1.src} className="w-72 rounded-tl-md"/>
+                        <img src={reserve2.src} className="w-52 rounded-tr-md"/>
                     </div>
                     <div className="flex flex-row gap-x-2 z-10">
-                        <img src={pic3.src} className="w-60 rounded-bl-md"/>
-                        <img src={pic4.src} className="w-64 rounded-br-md"/>
+                        <img src={reserve3.src} className="w-60 rounded-bl-md"/>
+                        <img src={reserve4.src} className="w-64 rounded-br-md"/>
                     </div>
                     
                     
