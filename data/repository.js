@@ -204,13 +204,13 @@ const tables = [
   { id: 15, min: 5, max: 8 },
 ];
 
-async function fillFoodDB() {
+export async function fillFoodDB() {
   for (let food of foods) {
     await foodModel.create(food);
   }
 }
 
-async function fillTableDB() {
+export async function fillTableDB() {
   for (let table of tables) {
     await tableModel.create(table);
   }
