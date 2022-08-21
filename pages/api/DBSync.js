@@ -1,8 +1,8 @@
-import { fillFoodDB, fillTableDB } from "../../data/repository";
 import { myDatabase } from "/data/database";
+import { fillFoodDB, fillTableDB } from "/data/initial-data";
 
 export default async function handler(req, res) {
-  try {    
+  try {
     await myDatabase.sync();
     await fillFoodDB();
     await fillTableDB();
