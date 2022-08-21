@@ -1,11 +1,11 @@
-import Base from "../components/base";
-import Introduction from "../components/introduction";
+import Base from "/components/base";
+import Introduction from "/components/introduction";
 
-const Home= () =>{
-  return(
+const Home = () => {
+  return (
     <Base>
-      <Introduction/>
+      <Introduction />
     </Base>
   );
-}
+};
 export default Home;

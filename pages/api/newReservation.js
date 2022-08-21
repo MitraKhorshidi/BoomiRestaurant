@@ -1,15 +1,11 @@
-import '../../data/database.js';
-import { ReservationRepository } from '../../data/database.js';
+import { ReservationRepository } from "/data/repository";
 
 export default async function handler(req, res) {
-
-  try{
+  try {
     const data = JSON.parse(req.body);
     const reservation = await ReservationRepository.newReservation(data);
-    res.status(200).json({...reservation})
+    res.status(200).json({ ...reservation });
+  } catch (error) {
+    res.status(500).send(error.message);
   }
-  catch(error){
-    res.status(500).send(error.message)
-  }
-
 }
