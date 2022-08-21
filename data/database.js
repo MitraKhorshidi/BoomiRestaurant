@@ -17,7 +17,7 @@ const CONFIGS = {
   },
 };
 
-const ENV = process.env.NODE_ENV;
+const ENV ="development"; //process.env.NODE_ENV;
 console.log("ENV", ENV, CONFIGS[ENV]);
 export const myDatabase = new Sequelize(CONFIGS[ENV]);
 
