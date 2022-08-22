@@ -1,4 +1,4 @@
-import { FoodRepository } from "../../data/repository";
+import { FoodRepository } from "/data/repository";
 
 export default async function handler(req, res) {
   try {

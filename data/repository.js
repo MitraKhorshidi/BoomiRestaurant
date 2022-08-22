@@ -1,16 +1,11 @@
 import { Op } from "sequelize";
-import { Food, Reservation } from "./common.js";
-import { fixDate, phoneValid } from "./utility.js";
-import {
-  foodModel,
-  orderItemModel,
-  orderModel,
-  reservationModel,
-  tableModel,
-} from "./database.js";
+import { Food, Reservation } from "./common";
+import { fixDate, phoneValid } from "./utility";
 
 export const ReservationRepository = {
   async newReservation({ userId, date, num, host, TableId }) {
+    const { database } = await import("./database");
+
     date = fixDate(date);
     if (date.getTime() < new Date().getTime()) {
       throw new Error("Cannot pick a date from past.");
@@ -21,7 +16,7 @@ export const ReservationRepository = {
 
     if (!phoneValid(userId)) throw new Error("phone number is not true");
 
-    const table = await tableModel.findByPk(TableId);
+    const table = await database.TableModel.findByPk(TableId);
 
     if (!table) throw new Error("this table is not exists");
 
@@ -31,14 +26,14 @@ export const ReservationRepository = {
       );
     }
 
-    const prevReserv = await reservationModel.findOne({
+    const prevReserv = await database.ReservationModel.findOne({
       where: { [Op.and]: [{ TableId: TableId }, { date: date }] },
     });
     if (prevReserv) {
       throw new Error("This table has been booked.");
     }
 
-    const reservation = await reservationModel.create({
+    const reservation = await database.ReservationModel.create({
       userId,
       date,
       num,
@@ -49,22 +44,27 @@ export const ReservationRepository = {
   },
 
   async searchReservation({ reservationId, userId }) {
-    const reservation = await reservationModel.findByPk(reservationId);
+    const { database } = await import("./database");
+    
+    const reservation = await database.ReservationModel.findByPk(reservationId);
     if (!reservation || reservation.userId != userId) {
       throw new Error("This reservation is not exist!");
     }
+
     return new Reservation(reservation);
   },
 
   async editReservation({ reservationId, userId, date, num, host, tableId }) {
-    const reservation = await reservationModel.findByPk(reservationId);
+    const { database } = await import("./database");
+    
+    const reservation = await database.ReservationModel.findByPk(reservationId);
     if (!reservation || !reservation.userId == userId) {
       throw new Error("This reservation not exist!");
     }
 
     if (!phoneValid(userId)) throw new Error("phone number is not true");
 
-    const table = await tableModel.findByPk(tableId);
+    const table = await database.TableModel.findByPk(tableId);
 
     if (!table) throw new Error("this table is not exists");
 
@@ -74,7 +74,7 @@ export const ReservationRepository = {
       );
     }
 
-    const prevReserv = await reservationModel.findOne({
+    const prevReserv = await database.ReservationModel.findOne({
       where: { [Op.and]: [{ TableId: tableId }, { date: date }] },
     });
     if (prevReserv) {
@@ -83,14 +83,18 @@ export const ReservationRepository = {
 
     reservation.set({ date, num, host, tableId });
     await reservation.save();
+
     return new Reservation(reservation);
   },
 
   async deleteReservation({ reservationId, userId }) {
-    const reservation = await reservationModel.findByPk(reservationId);
+    const { database } = await import("./database");
+    
+    const reservation = await database.ReservationModel.findByPk(reservationId);
     if (!reservation || reservation.userId != userId) {
       throw new Error("This reservation is not exist");
     }
+
     await reservation.destroy();
     return true;
     //succuss proccess
@@ -99,14 +103,16 @@ export const ReservationRepository = {
 
 export const OrderRepository = {
   async newOrder({ userId, address, shoppigCart }) {
-    const order = await orderModel.create({ userId, address, price });
+    const { database } = await import("./database");
+    const order = await database.OrderModel.create({ userId, address, price });
     //orderitem??
   },
 };
 
 export const FoodRepository = {
   async list() {
-    const list = await foodModel.findAll();
+    const { database } = await import("./database");
+    const list = await database.FoodModel.findAll();
     return list.map((item) => new Food(item));
   },
 };

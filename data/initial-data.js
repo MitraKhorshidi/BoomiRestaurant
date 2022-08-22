@@ -91,16 +91,14 @@ const tables = [
   { id: 15, min: 5, max: 8 },
 ];
 
-import { foodModel, tableModel } from "./database";
-
-export async function fillFoodDB() {
+export async function fillFoodDB(database) {
   for (let food of foods) {
-    await foodModel.create(food);
+    await database.FoodModel.create(food);
   }
 }
 
-export async function fillTableDB() {
+export async function fillTableDB(database) {
   for (let table of tables) {
-    await tableModel.create(table);
+    await database.TableModel.create(table);
   }
 }

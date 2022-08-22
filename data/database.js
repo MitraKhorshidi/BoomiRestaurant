@@ -1,56 +1,62 @@
 import { DataTypes, Sequelize } from "sequelize";
+import * as pg from "pg";
 
-const CONFIGS = {
-  development: {
-    dialect: "sqlite",
-    storage: process.env.DB_PATH,
+console.info("info - DB_URL", process.env.DB_URL);
+
+export const database = new Sequelize(process.env.DB_URL, {
+  dialectModule: pg,
+});
+
+const TableModel = database.TableModel = database.define("Table", {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
   },
-  production: {
-    username: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
-    dialect: "postgres",
-    dialectOptions: {
-      ssl: true,
-    },
+  min: DataTypes.INTEGER,
+  max: DataTypes.INTEGER,
+});
+
+const ReservationModel = database.ReservationModel = database.define("Reservation", {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
   },
-};
-
-const ENV ="development"; //process.env.NODE_ENV;
-console.log("ENV", ENV, CONFIGS[ENV]);
-export const myDatabase = new Sequelize(CONFIGS[ENV]);
-
-export const tableModel = myDatabase.define("Table", {
-  min: { type: DataTypes.INTEGER },
-  max: { type: DataTypes.INTEGER },
+  userId: DataTypes.INTEGER,
+  date: DataTypes.DATE,
+  num: DataTypes.INTEGER,
+  host: DataTypes.BOOLEAN,
 });
 
-export const reservationModel = myDatabase.define("Reservation", {
-  userId: { type: DataTypes.INTEGER },
-  date: { type: DataTypes.DATE },
-  num: { type: DataTypes.INTEGER },
-  host: { type: DataTypes.BOOLEAN },
+const FoodModel = database.FoodModel = database.define("Food", {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  title: DataTypes.STRING,
+  ingredients: DataTypes.STRING,
+  price: DataTypes.INTEGER,
 });
 
-tableModel.hasMany(reservationModel);
-reservationModel.belongsTo(tableModel);
-
-export const foodModel = myDatabase.define("Food", {
-  title: { type: DataTypes.STRING },
-  ingredients: { type: DataTypes.STRING },
-  price: { type: DataTypes.INTEGER },
+const OrderModel = database.OrderModel = database.define("Order", {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  userId: DataTypes.INTEGER,
+  address: DataTypes.STRING,
+  price: DataTypes.INTEGER,
 });
 
-export const orderModel = myDatabase.define("Order", {
-  userId: { type: DataTypes.INTEGER },
-  address: { type: DataTypes.STRING },
-  price: { type: DataTypes.INTEGER },
+const OrderItemModel = database.OrderItemModel = database.define("OrderItem", {
+  count: DataTypes.INTEGER,
 });
+    
+TableModel.hasMany(ReservationModel);
+ReservationModel.belongsTo(TableModel);
 
-export const orderItemModel = myDatabase.define("OrderItem", {
-  count: { type: DataTypes.INTEGER },
-});
-
-orderModel.belongsToMany(foodModel, { through: orderItemModel });
-foodModel.belongsToMany(orderModel, { through: orderItemModel });
+OrderModel.belongsToMany(FoodModel, { through: OrderItemModel });
+FoodModel.belongsToMany(OrderModel, { through: OrderItemModel });    
