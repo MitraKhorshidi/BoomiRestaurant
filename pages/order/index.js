@@ -6,6 +6,8 @@ import Button from "/components/button";
 import CartItem from "/components/cartItem";
 import { FoodRepository } from "/data/repository";
 import { apiRegisterOrder } from "/data/apiClient";
+import delivery from "/assets/images/delivery.svg";
+import { dateStr } from "/data/utility";
 
 const MODE_ORDER = 0;
 const MODE_CART = 1;
@@ -34,7 +36,6 @@ const OrderPage = ({ foods }) => {
   const addressRef = useRef();
 
   const [res, setRes] = useState(undefined);
-
   async function onOrderReq(event) {
     event.preventDefault();
 
@@ -49,9 +50,9 @@ const OrderPage = ({ foods }) => {
     }
   }
 
-  return (
+
+  if(!res || res.error)return (
     <Base>
-      {JSON.stringify(res)}
       {mode == MODE_ORDER && (
         <>
           <div className="flex flex-row justify-center gap-x-5 mt-10">
@@ -156,6 +157,51 @@ const OrderPage = ({ foods }) => {
       )}
     </Base>
   );
+
+  return(<>
+    <Base>
+      <div className="flex flex-row justify-center items-center gap-x-20 mt-10">
+        <table className="table-fixed border-separate border  border-slate-400">
+          <tr>
+            <td className="border border-slate-300 p-2">Order Number</td>
+            <td className="border border-slate-300 text-center">
+              {res.id}
+            </td>
+          </tr>
+          <tr>
+            <td className="border border-slate-300 p-2">Phone Number</td>
+            <td className="border border-slate-300 text-center">
+              {res.userId}
+            </td>
+          </tr>
+          <tr>
+            <td className="border border-slate-300 p-2">Total Price</td>
+            <td className="border border-slate-300 text-center">
+              {res.price}
+            </td>
+          </tr>
+          <tr>
+            <td className="border border-slate-300 p-2">Address</td>
+            <td className="border border-slate-300 text-center">
+              {res.address}
+            </td>
+          </tr>
+          <tr>
+            <td className="border border-slate-300 p-2">Time</td>
+            <td className="border border-slate-300 text-center">
+              {dateStr(res.time)}
+            </td>
+          </tr>
+        </table>
+        <div className="flex flex-col items-center">
+          <img src={delivery.src} className="w-32"/>
+          <p>Your Order will deliverd in 30 minutes.</p>
+          <p>Pay the total price to delivery man.</p>
+        </div>
+      </div>
+      
+    </Base>
+  </>);
 };
 export default OrderPage;
 
