@@ -1,10 +1,11 @@
 import { DataTypes, Sequelize } from "sequelize";
-import * as pg from "pg";
 
 console.info("info - DB_URL", process.env.DB_URL);
 
 export const database = new Sequelize(process.env.DB_URL, {
-  dialectModule: pg,
+  logging: false,
+  dialect: process.env.DB,
+  dialectModule: (process.env.DB != "sqlite") && require("pg"),
 });
 
 const TableModel = database.TableModel = database.define("Table", {
