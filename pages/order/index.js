@@ -5,6 +5,7 @@ import FoodCard from "/components/foodCard";
 import Button from "/components/button";
 import CartItem from "/components/cartItem";
 import { FoodRepository } from "/data/repository";
+import { apiRegisterOrder } from "/data/apiClient";
 
 const MODE_ORDER = 0;
 const MODE_CART = 1;
@@ -39,6 +40,7 @@ const OrderPage = ({ foods }) => {
 
     const userId = userIdRef.current.value;
     const address = addressRef.current.value;
+    if(confirm("Do you want to register this order ?"))
     try {
       const res = await apiRegisterOrder(userId, address, shoppingCart);
       setRes(res);
@@ -49,6 +51,7 @@ const OrderPage = ({ foods }) => {
 
   return (
     <Base>
+      {JSON.stringify(res)}
       {mode == MODE_ORDER && (
         <>
           <div className="flex flex-row justify-center gap-x-5 mt-10">

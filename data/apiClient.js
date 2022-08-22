@@ -39,3 +39,12 @@ export function apiSearchReservation(reservationId, userId) {
 
   return call(data, "/api/searchReservation");
 }
+export function apiRegisterOrder(userId , address , shoppigCart) {
+  const data = {
+    userId,
+    address,
+    shoppigCart,
+  };
+
+  return call(data, "/api/regOrder");
+}

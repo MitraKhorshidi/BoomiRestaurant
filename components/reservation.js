@@ -22,6 +22,8 @@ const Reservation = () => {
     const num = numberRef.current.value;
     const host = hostRef.current.value;
 
+    if(confirm("Do you want to register this reservation ?"))
+
     try {
       const res = await apiAddReservation(userId, TableId, num, host, date);
       setRes(res);

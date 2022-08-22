@@ -1,5 +1,5 @@
 import { Op } from "sequelize";
-import { Food, Reservation } from "./common";
+import { Food, Order, Reservation } from "./common";
 import { fixDate, phoneValid } from "./utility";
 
 export const ReservationRepository = {
@@ -104,8 +104,23 @@ export const ReservationRepository = {
 export const OrderRepository = {
   async newOrder({ userId, address, shoppigCart }) {
     const { database } = await import("./database");
-    const order = await database.OrderModel.create({ userId, address, price });
-    //orderitem??
+    const order = await database.OrderModel.create({ userId, address, price:0 });
+    
+    let price=0;
+
+    for(let foodID in shoppigCart){
+      const count = shoppigCart[foodID];
+      if(count<=0 || count>25) continue;
+      const food =await database.FoodModel.findByPk(foodID);
+      if(!food) continue;
+      price=price+count*food.price;
+      await order.addFood(food, { through: { count: count} });
+    }
+
+    order.price=price;
+    await order.save();
+
+    return new Order({id:order.id , address:order.address , userId:order.userId , price:order.price , time : order.createdAt});
   },
 };
 

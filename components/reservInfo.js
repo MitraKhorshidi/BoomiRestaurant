@@ -4,7 +4,9 @@ import { dateStr } from "/data/utility";
 
 export default function ReservInfo({ reservation, onOk }) {
   const [apiRes, setApiRes] = useState(undefined);
+  
   async function onCancel() {
+    if(confirm("Do you want to cancel your reservation ?"))
     try {
       const apiRes = await apiCancelReservation(
         reservation.id,
