@@ -197,6 +197,7 @@ const OrderPage = ({ foods }) => {
           <img src={delivery.src} className="w-32"/>
           <p>Your Order will deliverd in 30 minutes.</p>
           <p>Pay the total price to delivery man.</p>
+          <p>If you have any questions call<br/> the support service 96754234</p>
         </div>
       </div>
       
